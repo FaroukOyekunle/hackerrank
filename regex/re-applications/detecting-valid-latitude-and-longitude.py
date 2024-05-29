@@ -7,26 +7,20 @@
 #
 
 import re
+import sys
 
-for _ in range(int(input())):
-    s = input()
+N = int(input())
+pattern = '\([-+]?([1-9]\d*\.[0-9]+|[1-9]\d*),\s[-+]?([1-9]\d*\.[0-9]+|[1-9]\d*)\)'
+regexp = re.compile(pattern)
 
-    ok = re.match(r'''
-^\(                                     # ( au début
-   [+-]?                                # signe optionnel
-   (90(\.0+)?                           # 90 ou 90.0000...
-    | ( ([0-9]|[0-8][0-9])              # 0 à 89
-        (\.\d+)?                        # .1234567890
-      )
-   )
-   ,\s?                                 # ", " ou ","
-   [+-]?                                # signe optionnel
-   (180(\.0+)?                          # 180 ou 180.000...
-    | ( ([0-9]|[1-9][0-9]|1[0-7][0-9])  # 0 à 179
-        (\.\d+)?                        # décimales
-      )
-   )
-\)$                                     # ) finale
-''', s, re.VERBOSE)
-
-    print('Valid' if ok else 'Invalid')
+for i in range(0, N):
+    match = regexp.search(input())
+    if match:
+        lat = float(match.group(1))
+        lon = float(match.group(2))
+        if lat >= 0.0 and lat <= 90.0 and lon >= 0.0 and lon <= 180.0:
+            print("Valid")
+        else:
+            print("Invalid")
+    else:
+        print("Invalid")
