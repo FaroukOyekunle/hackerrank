@@ -1,0 +1,55 @@
+Explanation:
+1.  Initialization:
+    -   We initialize three variables:
+        -   maxLength to store the maximum length of a strictly increasing or decreasing subarray.
+        -   increaseLength to track the length of the current strictly increasing subarray.
+        -   decreaseLength to track the length of the current strictly decreasing subarray.
+2.  Iterating Through the Array:
+    -   We loop through the array from index 1 to nums.Length - 1, comparing each element with its previous element:
+        -   If nums[i] > nums[i - 1], the sequence is increasing, so we increment increaseLength and reset decreaseLength to 1.
+        -   If nums[i] < nums[i - 1], the sequence is decreasing, so we increment decreaseLength and reset increaseLength to 1.
+        -   If nums[i] == nums[i - 1], the sequence is neither increasing nor decreasing, so we reset both counters to 1.
+        -   At each step, we update maxLength with the maximum value of increaseLength and decreaseLength.
+3. Returning the Result:
+    -   The final value of maxLength represents the length of the longest strictly increasing or decreasing subarray in nums.
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example Walkthrough:
+
+Example 1:
+Input: nums = [1, 4, 3, 3, 2]
+
+Processing Steps:
+
+    -   1 → 4 (Increasing: increaseLength = 2, decreaseLength = 1)
+    -   4 → 3 (Decreasing: increaseLength = 1, decreaseLength = 2)
+    -   3 → 3 (Reset: increaseLength = 1, decreaseLength = 1)
+    -   3 → 2 (Decreasing: increaseLength = 1, decreaseLength = 2)
+    
+    -   Output: 2 (The longest strictly increasing or decreasing subarray has length 2).
+
+Example 2:
+Input: nums = [3, 3, 3, 3]
+
+Processing Steps:
+
+    -   All elements are equal, so no strictly increasing or decreasing subarray is formed.
+    -   Each element alone is a valid subarray of length 1.
+    
+    -   Output: 1
+
+Example 3:
+Input: nums = [3, 2, 1]
+
+Processing Steps:
+
+    -   3 → 2 (Decreasing: decreaseLength = 2)
+    -   2 → 1 (Decreasing: decreaseLength = 3)
+
+    -   Output: 3 (The longest strictly decreasing subarray is [3, 2, 1] of length 3).
+
+Complexity Analysis:
+    -   Time Complexity: 𝑂(𝑛) since we traverse the array only once.
+    -   Space Complexity: 𝑂(1) as we use only a few integer variables for tracking lengths.
